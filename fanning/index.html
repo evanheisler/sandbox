@@ -1,0 +1,80 @@
+<html>
+<head>
+  <title>Fanning Menu Proof of Concept</title>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+
+  <script>
+
+  $(document).ready(function() {
+    $('.content-wrapper > div:not(.one)').hide();
+
+    $('.nav').on('click','a',function() {
+      var unloadPage = $('.nav li.active a').data('page');
+      var loadPage = $(this).data('page');
+
+      $('.secondary, .tertiary').removeClass('open');
+      $('.nav .active').removeClass('active');
+      $(this).parent().addClass('active');
+
+      $(".column").one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+        $('.content-wrapper > div.'+ unloadPage +'').hide();
+        $('.content-wrapper > div.'+ loadPage +'').show();
+        $('.secondary, .tertiary').addClass('open');
+      });
+
+
+    });
+
+  });
+
+  </script>
+</head>
+<body>
+
+  <div class="primary column">
+
+    <ul class="nav">
+        <li class="active"><a href="#" data-page="one">Page 1</a></li>
+        <li><a href="#" data-page="two">Page 2</a></li>
+        <li><a href="#" data-page="three">Page 3</a></li>
+        <li><a href="#" data-page="four">Page 4</a></li>
+    </ul>
+  </div>
+
+  <div class="secondary column open">
+
+    <div class="content-wrapper">
+
+      <div class="one">Secondary, Page 1</div>
+
+      <div class="two">Secondary, Page 2</div>
+
+      <div class="three">Secondary, Page 3</div>
+
+      <div class="four">Secondary, Page 4</div>
+
+    </div>
+
+  </div>
+
+  <div class="tertiary column open">
+
+    <div class="content-wrapper">
+
+      <div class="one">Tertiary, Page 1</div>
+
+      <div class="two">Tertiary, Page 2</div>
+
+      <div class="three">Tertiary, Page 3</div>
+
+      <div class="four">Tertiary, Page 4</div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

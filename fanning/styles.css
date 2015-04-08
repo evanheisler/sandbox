@@ -1,0 +1,63 @@
+.column {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.column:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  bottom: 10px;
+  left: -50%;
+  right: 100%;
+  z-index: -2;
+  border-radius: 10px / 350px;
+  box-shadow: 0 0 15px rgba(0,0,0,.3);
+}
+
+.primary {
+  z-index: 999;
+}
+
+.content-wrapper {
+  opacity: 0;
+  padding: 20px;
+  transition: all .5s ease-out;
+}
+
+.secondary {
+  left: 15%;
+  width: 85%;
+  z-index: 1;
+}
+
+.secondary .content-wrapper {
+  left: -15%;
+  position: relative;
+}
+
+.secondary.open .content-wrapper {
+  left: 0%;
+  opacity: 1;
+}
+
+.tertiary {
+  left: 50%;
+  width: 50%;
+  z-index: 2;
+}
+
+.tertiary .content-wrapper {
+  left: -50%;
+  position: relative;
+}
+
+.tertiary.open .content-wrapper {
+  left: 0%;
+  opacity: 1;
+}
