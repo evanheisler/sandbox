@@ -1,0 +1,124 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/" />
+    <title>flapper news</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body ng-app="flapperNews">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <ui-view></ui-view>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/ng-template" id="/home.html">
+      <div class="page-header">
+        <h1>Flapper News</h1>
+      </div>
+
+      <div ng-repeat="post in posts | orderBy: '-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+        <a ng-show="post.link" href="{{post.link}}">
+          {{post.title}}
+        </a>
+        <span ng-hide="post.link">{{post.title}} </span>
+        – upvotes: {{post.upvotes}}
+        <span><a href="/posts/{{$index}}">Comments</a></span>
+      </div>
+
+      <form class="" ng-submit="addPost()" method="post">
+        <div class="form-group">
+          <input
+          type="text"
+          ng-model="title"
+          placeholder="Title"
+          class="form-control">
+        </div>
+        <div class="form-group">
+          <input
+          type="text"
+          ng-model="link"
+          placeholder="Link"
+          class="form-control"
+          >
+        </div>
+        <button class="btn btn-primary" type="submit" name="button">Post</button>
+      </form>
+    </script>
+
+
+    <script type="text/ng-template" id="/posts.html">
+      <div class="page-header">
+        <h3>
+          <a href="{{post.link}}" ng-show="post.link">{{post.title}}</a>
+          <span ng-hide="post.link">{{post.title}}</span>
+        </h3>
+      </div>
+
+      <div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+        {{comment.upvotes}} - by {{comment.author}} <span class="small">{{comment.body}}</span>
+      </div>
+
+      <form ng-submit="addComment()">
+        <h3>Add a new comment</h3>
+
+        <div class="form-group">
+          <input type="text"
+          class="form-control"
+          placeholder="Comment"
+          ng-model="body"
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </script>
+
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
