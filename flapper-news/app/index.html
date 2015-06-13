@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/" />
     <title>flapper news</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -21,9 +22,11 @@
     <!-- endbuild -->
   </head>
   <body ng-app="flapperNews">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <ui-view></ui-view>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <ui-view></ui-view>
+        </div>
       </div>
     </div>
 
@@ -39,6 +42,7 @@
         </a>
         <span ng-hide="post.link">{{post.title}} </span>
         – upvotes: {{post.upvotes}}
+        <span><a href="/posts/{{$index}}">Comments</a></span>
       </div>
 
       <form class="" ng-submit="addPost()" method="post">
@@ -58,6 +62,34 @@
           >
         </div>
         <button class="btn btn-primary" type="submit" name="button">Post</button>
+      </form>
+    </script>
+
+
+    <script type="text/ng-template" id="/posts.html">
+      <div class="page-header">
+        <h3>
+          <a href="{{post.link}}" ng-show="post.link">{{post.title}}</a>
+          <span ng-hide="post.link">{{post.title}}</span>
+        </h3>
+      </div>
+
+      <div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+        {{comment.upvotes}} - by {{comment.author}} <span class="small">{{comment.body}}</span>
+      </div>
+
+      <form ng-submit="addComment()">
+        <h3>Add a new comment</h3>
+
+        <div class="form-group">
+          <input type="text"
+          class="form-control"
+          placeholder="Comment"
+          ng-model="body"
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
       </form>
     </script>
 
