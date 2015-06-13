@@ -4,6 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+require('./models/Posts');
+require('./models/Comments');
+
+mongoose.connect('mongodb://localhost/news')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,8 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-app.use(express.static(__dirname + '/public'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use(express.static(path.join(__dirname + '/public')));
+app.use('/bower_components',  express.static(path.join(__dirname + '/bower_components')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
