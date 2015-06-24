@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('scheduler')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/signup', {
+.config(function ($stateProvider) {
+  $stateProvider
+  .state('signup', {
+    url: '/signup',
+    views: {
+      '': { // main template
         templateUrl: 'views/signup/signup.html',
-        controller: 'SignupCtrl',
-        controllerAs: 'vm'
-      });
+        controller: 'SignupCtrl'
+      },
+    }
   });
+});

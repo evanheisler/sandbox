@@ -1,18 +1,15 @@
 'use strict';
 
 angular.module('scheduler', [
-  'ngRoute',
+  'ui.router',
   'ngCookies',
   'ngResource',
   'ngSanitize',
   'ngAnimate'
 ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+    $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');

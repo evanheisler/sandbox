@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('scheduler')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
+.config(function ($stateProvider) {
+  $stateProvider
+  .state('home', {
+    url: '/',
+    views: {
+      '': { // main template
         templateUrl: 'views/home/home.html',
-        controller: 'HomeCtrl',
-        controllerAs: 'vm'
-      });
+        controller: 'HomeCtrl'
+      },
+    }
   });
+});
