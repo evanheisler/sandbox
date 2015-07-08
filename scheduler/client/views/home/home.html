@@ -1,7 +1,32 @@
 <div class="container-fluid">
   <div class="row">
     <div ng-controller="HomeCtrl">
-      {{ name }}
+      <div class="col-md-4 classroom" ng-repeat="classroom in classrooms">
+        <h2>{{ classroom.title }}<small class="pull-right"><a href=""><i class="fa fa-pencil"></i></a></small></h2>
+        <div class="row">
+          <h3 class="col-sm-2 text-center">
+            <div class="btn-group-vertical" role="group">
+              <button type="button" class="btn btn-default"><i class="fa fa-arrow-up"></i></button>
+              <button type="button" class="btn btn-default"><i class="fa fa-arrow-down"></i></button>
+            </div>
+          </h3>
+          <div class="col-sm-10">
+            <h3>{{ classroom.children }} <small>Children in attendance</small></h3>
+            <p>{{ classroom.threshold }} <small>Per teacher</small></p>
+            <p>{{ classroom.maxOccupancy }} <small>Maximum occupancy</small></p>
+          </div>
+        </div>
+        <div class="progress" ng-binding="{{ barWidth(classroom.children, classroom.maxOccupancy, classroom.threshold) }}">
+          <div ng-repeat="bar in bars | limitTo: fullSections">
+            <div class="progress-bar {{ bar.cssClass }}" style="width: {{ bar.width }}%">
+              {{ bar.name }}
+            </div>
+          </div>
+          <!-- <div class="progress-bar progress-bar-success" style="width: {{ barWidth(classroom.children, classroom.maxOccupancy, classroom.threshold) }}%">
+          {{ classroom.children }} ({{ classroom.children % classroom.threshold }})
+        </div> -->
+      </div>
     </div>
   </div>
+</div>
 </div>
